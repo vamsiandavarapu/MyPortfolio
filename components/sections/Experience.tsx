@@ -29,7 +29,7 @@ export default function Experience() {
         {/* Section Header */}
         <div className="mb-20 text-center w-full flex flex-col items-center">
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">
-            Projects <span className="text-amber">Timeline</span>
+            Experience
           </h2>
           <div className="h-[2px] w-20 bg-amber mt-4 rounded-full" />
         </div>
