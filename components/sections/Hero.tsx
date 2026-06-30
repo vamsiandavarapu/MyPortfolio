@@ -41,14 +41,19 @@ export default function Hero({ onScrollToSection }: HeroProps) {
       }).catch(() => {});
     };
 
-    document.addEventListener("click", start, { once: true });
-    document.addEventListener("keydown", start, { once: true });
-    document.addEventListener("touchstart", start, { once: true });
+    const section = sectionRef.current;
+    if (section) {
+      section.addEventListener("click", start, { once: true });
+      section.addEventListener("keydown", start, { once: true });
+      section.addEventListener("touchstart", start, { once: true });
+    }
 
     return () => {
-      document.removeEventListener("click", start);
-      document.removeEventListener("keydown", start);
-      document.removeEventListener("touchstart", start);
+      if (section) {
+        section.removeEventListener("click", start);
+        section.removeEventListener("keydown", start);
+        section.removeEventListener("touchstart", start);
+      }
     };
   }, []);
 
