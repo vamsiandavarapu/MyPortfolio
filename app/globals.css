@@ -1,26 +1,131 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-amber: #E8923C;
+  --color-amber-dim: #C4741E;
+  --color-data-blue: #7EB8F7;
+  --color-node-glow: #A78BFA;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #0D0D0D;
+  --foreground: #F5F0EA;
+  --card: #141414;
+  --card-foreground: #F5F0EA;
+  --popover: #141414;
+  --popover-foreground: #F5F0EA;
+  --primary: #E8923C;
+  --primary-foreground: #0D0D0D;
+  --secondary: #1A1A1A;
+  --secondary-foreground: #F5F0EA;
+  --muted: #1A1A1A;
+  --muted-foreground: #8A8070;
+  --accent: #E8923C;
+  --accent-foreground: #0D0D0D;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgba(255,255,255,0.08);
+  --input: rgba(255,255,255,0.08);
+  --ring: #E8923C;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+  html {
+    background: #0D0D0D;
+    scroll-behavior: smooth;
+  }
+  body {
+    background: #0D0D0D;
+    color: #F5F0EA;
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0D0D0D; }
+::-webkit-scrollbar-thumb { background: #E8923C33; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #E8923C66; }
+
+/* Utility classes */
+.text-amber { color: #E8923C; }
+.text-data-blue { color: #7EB8F7; }
+.bg-amber { background-color: #E8923C; }
+.border-amber { border-color: #E8923C; }
+
+.glow-amber {
+  box-shadow: 0 0 20px rgba(232, 146, 60, 0.3), 0 0 60px rgba(232, 146, 60, 0.1);
+}
+.glow-blue {
+  box-shadow: 0 0 20px rgba(126, 184, 247, 0.3);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #E8923C 0%, #F5C27A 50%, #E8923C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Canvas layer */
+.canvas-3d {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Section transitions */
+.section-fade {
+  opacity: 0;
+  transform: translateY(24px);
 }
